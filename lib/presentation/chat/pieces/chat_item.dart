@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:my_chat/config/app_router.gr.dart';
+import 'package:my_chat/presentation/common/pages/home_screen.dart';
 import 'package:my_chat/styles/colors.dart';
 
 class ChatItem extends StatefulWidget{
@@ -23,6 +26,7 @@ class _ChatItemState extends State<ChatItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        context.pushRoute(const ChatDiscussionRoute()); // Navigate to HomeScreen on tap
       },
       child: Container(
         padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
