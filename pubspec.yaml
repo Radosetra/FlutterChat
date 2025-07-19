@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
 
   auto_route: ^9.3.0+1
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +26,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/users/
     - assets/icons/
     - assets/fonts/
 
