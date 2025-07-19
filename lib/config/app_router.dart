@@ -13,6 +13,7 @@ class AppRouter extends RootStackRouter {
     // of the replaceInRouteName property
     AutoRoute(page: HomeRoute.page, initial: true),
     AutoRoute(page: ChatHomeRoute.page),
+    AutoRoute(page: ChatDiscussionRoute.page),
   ];
 
   @override
