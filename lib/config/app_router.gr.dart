@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:flutter/material.dart' as _i5;
 import 'package:my_chat/presentation/chat/pages/chat_discussion_screen.dart'
     as _i1;
 import 'package:my_chat/presentation/chat/pages/chat_home_screen.dart' as _i2;
@@ -16,10 +17,19 @@ import 'package:my_chat/presentation/common/pages/home_screen.dart' as _i3;
 
 /// generated route for
 /// [_i1.ChatDiscussionScreen]
-class ChatDiscussionRoute extends _i4.PageRouteInfo<void> {
-  const ChatDiscussionRoute({List<_i4.PageRouteInfo>? children})
-      : super(
+class ChatDiscussionRoute extends _i4.PageRouteInfo<ChatDiscussionRouteArgs> {
+  ChatDiscussionRoute({
+    _i5.Key? key,
+    required String userId,
+    required String userName,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
           ChatDiscussionRoute.name,
+          args: ChatDiscussionRouteArgs(
+            key: key,
+            userId: userId,
+            userName: userName,
+          ),
           initialChildren: children,
         );
 
@@ -28,9 +38,33 @@ class ChatDiscussionRoute extends _i4.PageRouteInfo<void> {
   static _i4.PageInfo page = _i4.PageInfo(
     name,
     builder: (data) {
-      return const _i1.ChatDiscussionScreen();
+      final args = data.argsAs<ChatDiscussionRouteArgs>();
+      return _i1.ChatDiscussionScreen(
+        key: args.key,
+        userId: args.userId,
+        userName: args.userName,
+      );
     },
   );
+}
+
+class ChatDiscussionRouteArgs {
+  const ChatDiscussionRouteArgs({
+    this.key,
+    required this.userId,
+    required this.userName,
+  });
+
+  final _i5.Key? key;
+
+  final String userId;
+
+  final String userName;
+
+  @override
+  String toString() {
+    return 'ChatDiscussionRouteArgs{key: $key, userId: $userId, userName: $userName}';
+  }
 }
 
 /// generated route for
