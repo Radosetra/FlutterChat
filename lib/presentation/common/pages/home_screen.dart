@@ -13,19 +13,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Welcome to the Home Screen")),
+      appBar: AppBar(title: const Text("Welcome to the Home Screen")),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate to BookDetailsScreen
-            // context.pushRoute(BookDetailsRoute(id: 1));
-            context.pushRoute(const ChatHomeRoute());
-          },
-          child: Text("Go to Chat"),
-        ),
+        child: Column(
+          
+          children: [
+            const Text("Choose your user Id"),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                context.pushRoute(ChatDiscussionRoute(userId: "userA", userName: "John Doe"));
+              },
+              child: const Text("User A"),
+            ),
+            const SizedBox(height: 20),
+             ElevatedButton(
+              onPressed: () {
+                context.pushRoute(ChatDiscussionRoute(userId: "userB", userName: "Philippe Smith"));
+              },
+              child: const Text("User B"),
+            ),
+          ],
+        )
       ),
     );
   }

@@ -3,8 +3,17 @@ import 'package:my_chat/icons/mychat_icons.dart';
 import 'package:my_chat/presentation/common/pieces/mychat_icon_widget.dart';
 import 'package:my_chat/styles/colors.dart';
 
-class MessageInputWidget extends StatelessWidget {
-  const MessageInputWidget({super.key});
+class MessageInputWidget extends StatefulWidget {
+  const MessageInputWidget({super.key, required this.onMessageChanged, required this.onSubmitMessage});
+  
+  final Function(String message) onMessageChanged;
+  final Function() onSubmitMessage;
+
+  @override
+  State<MessageInputWidget> createState() => _MessageInputWidgetState();
+}
+
+class _MessageInputWidgetState extends State<MessageInputWidget> {
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +35,15 @@ class MessageInputWidget extends StatelessWidget {
                 color: MyChatColors.gray.withOpacity(0.4),
                 borderRadius: BorderRadius.circular(5),  
               ),
-              child: const TextField(
+              child: TextField(
                 maxLines: null,            
                 minLines: 1,               
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Type a message...',
                   border: InputBorder.none,
                   hintStyle: TextStyle(color: MyChatColors.black), // Hint text style
                 ),
+                onChanged: widget.onMessageChanged,
               ),
             ),
           ),
@@ -41,6 +51,7 @@ class MessageInputWidget extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               // Send message action
+              widget.onSubmitMessage();
             },
             style: const ButtonStyle(
               backgroundColor: WidgetStatePropertyAll(MyChatColors.primary),

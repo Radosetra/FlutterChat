@@ -26,7 +26,7 @@ class _ChatItemState extends State<ChatItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        context.pushRoute(const ChatDiscussionRoute()); // Navigate to HomeScreen on tap
+        context.pushRoute(ChatDiscussionRoute(userId: "1234", userName: "John Doe")); // Navigate to HomeScreen on tap
       },
       child: Container(
         padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),

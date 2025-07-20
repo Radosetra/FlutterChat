@@ -6,11 +6,12 @@ import 'package:my_chat/presentation/chat/view/discussion_view.dart';
 @RoutePage()
 class ChatDiscussionScreen extends StatefulWidget {
   const ChatDiscussionScreen({
-    super.key,
+    super.key, required this.userId, required this.userName,
     // required this.imagePath,
   });
 
-  // String imagePath;
+  final String userId;
+  final String userName;
 
   @override
   State<ChatDiscussionScreen> createState() => _ChatDiscussionScreenState();
@@ -19,9 +20,9 @@ class ChatDiscussionScreen extends StatefulWidget {
 class _ChatDiscussionScreenState extends State<ChatDiscussionScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: MyChatDiscussionBar(),
-      body: DiscussionView(),
+    return Scaffold(
+      appBar: MyChatDiscussionBar(userName: widget.userName),
+      body: DiscussionView(userId: widget.userId, userName: widget.userName),
 
     );
   }

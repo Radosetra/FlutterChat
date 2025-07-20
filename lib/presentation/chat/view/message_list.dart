@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:my_chat/data/fake/messages_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_chat/presentation/chat/pieces/message_item.dart';
+import 'package:my_chat/presentation/chat/state/message_provider.dart';
 import 'package:my_chat/styles/colors.dart';
-import 'package:my_chat/types/message.dart';
 
-class MessageList extends StatefulWidget {
-  const MessageList({super.key});
+class MessageList extends ConsumerWidget  {
+  MessageList({super.key, required this.userId});
 
+  String userId;
+
+  // final String userId = "user_2"; 
+ // Example user ID, replace with actual user ID logic
   @override
-  State<MessageList> createState() => _MessageListState();
-}
-
-class _MessageListState extends State<MessageList> {
-
-  final String userId = "user_2"; // Example user ID, replace with actual user ID logic
-
-  List<Message> messages = generateFakeMessages();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final messages = ref.watch(messagesProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: ListView.separated(

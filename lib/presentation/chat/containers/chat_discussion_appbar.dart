@@ -3,23 +3,26 @@ import 'package:my_chat/icons/mychat_icons.dart';
 import 'package:my_chat/presentation/common/pieces/mychat_icon_widget.dart';
 
 class MyChatDiscussionBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyChatDiscussionBar({
+  MyChatDiscussionBar({
     super.key,
+    required this.userName,
   });
+
+  String userName;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Row(
+      title: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             backgroundImage: AssetImage('assets/images/users/1.png'), // Replace with your image path
             maxRadius: 15,
           ),
-          SizedBox(width: 10), // Space between avatar and text
+          const SizedBox(width: 10), // Space between avatar and text
           Text(
-            "John Doe",
-            style: TextStyle(
+            userName,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
