@@ -11,4 +11,13 @@ class Message {
     required this.content,
     this.timestamp,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'senderId': senderId,
+      'senderName': senderName,
+      'content': content,
+      'timestamp': timestamp?.toIso8601String(), // Optional
+    };
+  }
 }
