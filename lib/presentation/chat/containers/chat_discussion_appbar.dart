@@ -30,7 +30,6 @@ class MyChatDiscussionBar extends StatelessWidget implements PreferredSizeWidget
         ],
       ),
       titleSpacing: 10,
-      // automaticallyImplyLeading: false,
       leading: Container(
         margin: const EdgeInsets.only(left: 10),
         child: const MyChatIconWidget(
@@ -47,5 +46,6 @@ class MyChatDiscussionBar extends StatelessWidget implements PreferredSizeWidget
       ],
     );
   }
+  @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 1);
 }
