@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chat/config/app_router.gr.dart';
-import 'package:my_chat/presentation/common/pages/home_screen.dart';
 import 'package:my_chat/styles/colors.dart';
 
 class ChatItem extends StatefulWidget{
