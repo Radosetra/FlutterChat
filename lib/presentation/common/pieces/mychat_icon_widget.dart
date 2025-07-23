@@ -20,8 +20,8 @@ class MyChatIconWidget extends StatelessWidget {
       width: size,
       height: size,
       colorFilter: color != null
-          ? ColorFilter.mode(color!, BlendMode.srcIn)
-          : null,
+        ? ColorFilter.mode(color!, BlendMode.srcIn)
+        : null,
     );
   }
 }
