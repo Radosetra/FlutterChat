@@ -3,12 +3,14 @@ class Message {
   final String senderId;
   final String senderName;
   final String content;
+  final String roomId;
   DateTime? timestamp;
 
   Message({
     required this.senderId,
     required this.senderName,
     required this.content,
+    required this.roomId,
     this.timestamp,
   });
 
@@ -17,6 +19,7 @@ class Message {
       'senderId': senderId,
       'senderName': senderName,
       'content': content,
+      'roomId': roomId,
       'timestamp': timestamp?.toIso8601String(), // Optional
     };
   }
