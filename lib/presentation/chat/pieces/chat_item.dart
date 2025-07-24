@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:my_chat/config/app_router.gr.dart';
 import 'package:my_chat/styles/colors.dart';
 
-class ChatItem extends StatefulWidget{
+class ChatItem extends StatelessWidget {
+  String userId;
   String name;
   String messageText;
   String imagePath;
@@ -11,21 +12,18 @@ class ChatItem extends StatefulWidget{
   bool isMessageRead;
   ChatItem({
     super.key, 
+    required this.userId,
     required this.name,
     required this.messageText,
     required this.imagePath,
     required this.time,
     required this.isMessageRead});
   @override
-  _ChatItemState createState() => _ChatItemState();
-}
-
-class _ChatItemState extends State<ChatItem> {
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        context.pushRoute(ChatDiscussionRoute(userId: "1234", userName: "John Doe")); // Navigate to HomeScreen on tap
+        // id of the user destination
+        context.pushRoute(ChatDiscussionRoute(userId: userId, userNameDestination: name));
       },
       child: Container(
         padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
@@ -35,7 +33,7 @@ class _ChatItemState extends State<ChatItem> {
               child: Row(
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundImage: AssetImage(widget.imagePath),
+                    backgroundImage: AssetImage(imagePath),
                     maxRadius: 30,
                   ),
                   const SizedBox(width: 16,),
@@ -46,10 +44,10 @@ class _ChatItemState extends State<ChatItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            widget.name, 
+                            name, 
                             style: const TextStyle(fontSize: 16),),
                           const SizedBox(height: 6,),
-                          Text(widget.messageText,style: TextStyle(fontSize: 12,color: MyChatColors.gray, fontWeight: widget.isMessageRead?FontWeight.bold:FontWeight.normal),),
+                          Text(messageText,style: TextStyle(fontSize: 12,color: MyChatColors.gray, fontWeight: isMessageRead?FontWeight.bold:FontWeight.normal),),
                         ],
                       ),
                     ),
@@ -57,7 +55,7 @@ class _ChatItemState extends State<ChatItem> {
                 ],
               ),
             ),
-            Text(widget.time,style: TextStyle(fontSize: 12,fontWeight: widget.isMessageRead?FontWeight.bold:FontWeight.normal),),
+            Text(time,style: TextStyle(fontSize: 12,fontWeight: isMessageRead?FontWeight.bold:FontWeight.normal),),
           ],
         ),
       ),

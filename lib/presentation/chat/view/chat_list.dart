@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_chat/data/fake/chat_users_data.dart';
 import 'package:my_chat/presentation/chat/pieces/chat_item.dart';
+import 'package:my_chat/presentation/common/providers/user_state_provider.dart';
 
-class ChatList extends StatefulWidget {
+class ChatList extends ConsumerWidget {
   const ChatList({super.key});
 
   @override
-  State<ChatList> createState() => _ChatListState();
-}
-
-class _ChatListState extends State<ChatList> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final actifUsers = ref.watch(userProvider).activeUsers;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: ListView.builder(
-        itemCount: chatUsersData.length,
+        itemCount: actifUsers.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index){
           return ChatItem(
-            name: chatUsersData[index].name,
+            userId: actifUsers[index].userId,
+            name: actifUsers[index].userName,
             messageText: chatUsersData[index].messageText,
             imagePath: chatUsersData[index].imagePath,
             time: chatUsersData[index].time,

@@ -5,10 +5,10 @@ import 'package:my_chat/presentation/common/pieces/mychat_icon_widget.dart';
 class MyChatDiscussionBar extends StatelessWidget implements PreferredSizeWidget {
   MyChatDiscussionBar({
     super.key,
-    required this.userName,
+    required this.userNameDestination,
   });
 
-  String userName;
+  String userNameDestination;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MyChatDiscussionBar extends StatelessWidget implements PreferredSizeWidget
           ),
           const SizedBox(width: 10), // Space between avatar and text
           Text(
-            userName,
+            userNameDestination,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
