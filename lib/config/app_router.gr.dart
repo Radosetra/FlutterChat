@@ -21,14 +21,14 @@ class ChatDiscussionRoute extends _i4.PageRouteInfo<ChatDiscussionRouteArgs> {
   ChatDiscussionRoute({
     _i5.Key? key,
     required String userId,
-    required String userName,
+    required String userNameDestination,
     List<_i4.PageRouteInfo>? children,
   }) : super(
           ChatDiscussionRoute.name,
           args: ChatDiscussionRouteArgs(
             key: key,
             userId: userId,
-            userName: userName,
+            userNameDestination: userNameDestination,
           ),
           initialChildren: children,
         );
@@ -42,7 +42,7 @@ class ChatDiscussionRoute extends _i4.PageRouteInfo<ChatDiscussionRouteArgs> {
       return _i1.ChatDiscussionScreen(
         key: args.key,
         userId: args.userId,
-        userName: args.userName,
+        userNameDestination: args.userNameDestination,
       );
     },
   );
@@ -52,18 +52,18 @@ class ChatDiscussionRouteArgs {
   const ChatDiscussionRouteArgs({
     this.key,
     required this.userId,
-    required this.userName,
+    required this.userNameDestination,
   });
 
   final _i5.Key? key;
 
   final String userId;
 
-  final String userName;
+  final String userNameDestination;
 
   @override
   String toString() {
-    return 'ChatDiscussionRouteArgs{key: $key, userId: $userId, userName: $userName}';
+    return 'ChatDiscussionRouteArgs{key: $key, userId: $userId, userNameDestination: $userNameDestination}';
   }
 }
 
