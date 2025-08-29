@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_chat/config/app_router.gr.dart';
 import 'package:my_chat/presentation/chat/containers/message_input.dart';
-import 'package:my_chat/presentation/chat/pages/chat_discussion_screen.dart';
 import 'package:my_chat/presentation/common/providers/socket_service_provider.dart';
 import 'package:my_chat/presentation/common/providers/user_state_provider.dart';
 import 'package:my_chat/types/user.dart';
@@ -55,7 +54,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(title: const Text("Welcome to the Home Screen")),
       body: Center(
         child: Column(
-          
           children: [
             const Text("Enter your username please"),
             const SizedBox(height: 20),
