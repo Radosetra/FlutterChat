@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyChatColors {
   static const blue = Color(0xFFA0CDED);
   static const secondary = Color(0xFFCBE9FF); // ligthblue
-  static const primary = Color(0xFF2D3880); // darkblue
+  static const primary = Color(0xFF2E69FF); // darkblue
   static const yellow = Color(0xFFFEFFC2);
   static const darkyellow = Color(0xFFFEFFC2);
   static const orange = Color(0xFFF8D0A3);
