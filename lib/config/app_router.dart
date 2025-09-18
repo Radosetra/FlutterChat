@@ -11,7 +11,8 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     // HomeScreen is generated as HomeRoute because
     // of the replaceInRouteName property
-    AutoRoute(page: HomeRoute.page, initial: true),
+    // AutoRoute(page: HomeRoute.page, initial: true),
+    AutoRoute(page: LoginRoute.page, initial: true),
     AutoRoute(page: ChatHomeRoute.page),
     AutoRoute(page: ChatDiscussionRoute.page),
   ];
