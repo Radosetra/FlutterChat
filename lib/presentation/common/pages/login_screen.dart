@@ -1,14 +1,32 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_chat/presentation/common/pieces/mychat_input_widget.dart';
+import 'package:my_chat/presentation/common/providers/auth_provider.dart';
 import 'package:my_chat/styles/colors.dart';
 
 @RoutePage()
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider);
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -18,22 +36,22 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 24.0),
 
             // Logo and Title Section
-            Image.asset(
-              "assets/logos/Logo_MyChat_Horizental.png",
-              height: 50,
-              width: 70,
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Image.asset(
+                "assets/logos/logo-without-text-bg.png",
+                height: 50,
+                width: 70,
+              ),
             ),
-            // SvgPicture.asset(
-            //   "assets/logos/Logo-MyChat-Horizental.svg",
-            //   // height: 40,
-            //   // width: 70,
-            // ),
+            
             const SizedBox(height: 16.0),
             const Text(
-              'Login',
+              'Welcome Back!',
               style: TextStyle(
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold,
+                color: MyChatColors.primary
               ),
               textAlign: TextAlign.left,
             ),
@@ -48,43 +66,33 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 48.0),
 
             // Email Field
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'alina.solvaeica@gmail.com',
-                labelText: 'E-mail Address',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.grey[200],
-                prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
-              ),
-              keyboardType: TextInputType.emailAddress,
+            Input(
+              controller: _emailController,
+              hint: "johndoe@gmail.com",
+              label: "Email address",
+              leading: const Icon(Icons.email_outlined, color: Colors.grey),
             ),
             const SizedBox(height: 16.0),
 
             // Password Field
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: '********',
-                labelText: 'Password',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide.none,
+            Input(
+              controller: _passwordController,
+              label: "Password", 
+              hint: "********",
+              leading: const Icon(Icons.lock_outline, color: Colors.grey),
+              trailing: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                  color: Colors.grey,
                 ),
-                filled: true,
-                fillColor: Colors.grey[200],
-                prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.visibility_off, color: Colors.grey),
-                  onPressed: () {
-                    // Toggle password visibility
-                  },
-                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
               ),
             ),
+
             const SizedBox(height: 16.0),
 
             // Remember Me and Forgot Password Section
@@ -114,7 +122,14 @@ class LoginScreen extends StatelessWidget {
 
             // Login Button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+              // Get the current values from the controllers
+              final email = _emailController.text;
+              final password = _passwordController.text;
+
+              // Use ref.read to call the login method on your AuthNotifier
+              ref.read(authProvider.notifier).login(email, password);
+            },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MyChatColors.primary,
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -122,15 +137,17 @@ class LoginScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
-              child: const Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              child: authState.status == AuthStatus.loading
+                ? const CircularProgressIndicator(color: Colors.white)
+                : const Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 24.0),
 
             // 'Or' Divider Section
@@ -144,7 +161,7 @@ class LoginScreen extends StatelessWidget {
                 Expanded(child: Divider(color: MyChatColors.gray)),
               ],
             ),
-            const SizedBox(height: 48.0),
+            const SizedBox(height: 24.0),
 
             // Sign Up Link
             Row(
@@ -171,3 +188,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
