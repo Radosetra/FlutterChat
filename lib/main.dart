@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_chat/config/app_router.dart';
-import 'package:my_chat/presentation/common/providers/socket_service_provider.dart';
+import 'package:my_chat/config/app_router.gr.dart';
+import 'package:my_chat/presentation/common/providers/auth_provider.dart';
 
 void main() {
   runApp(const ProviderScope(
@@ -9,28 +10,29 @@ void main() {
   ));
 }
 
-class MainApp extends ConsumerStatefulWidget  {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  ConsumerState<MainApp> createState() => _MainAppState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Correctly get the router instance
+    final appRouter = ref.watch(appRouterProvider); // if appRouterProvider changed - the widget is rebuild
 
-class _MainAppState extends ConsumerState<MainApp> {
-  final _appRouter = AppRouter();
+    // Correctly listen to the auth state for navigation
+    ref.listen(authProvider, (previousState, newState) {
+      if (newState.status == AuthStatus.authenticated) {
+        // Redirect to the main authenticated screen
+        appRouter.replaceAll([const ChatHomeRoute()]);
+      } else if (newState.status == AuthStatus.unauthenticated) {
+        // Redirect to the login screen
+        appRouter.replaceAll([const LoginRoute()]);
+      }
+    });
 
-  @override
-  void initState() {
-    super.initState();
-    final socketService = ref.read(socketServiceProvider);
-    socketService.connect();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+    // AutoRoute handle routes
     return MaterialApp.router(
-      routerConfig: _appRouter.config(),
-      debugShowCheckedModeBanner: false,
+      routerDelegate: appRouter.delegate(),
+      routeInformationParser: appRouter.defaultRouteParser(),
     );
   }
 }
