@@ -25,6 +25,7 @@ class _ChatDiscussionScreenState extends ConsumerState<ChatDiscussionScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    // here initialize the socket connection
     super.initState();
     final currentUser = ref.read(userProvider).currentUser;
     final socketService = ref.read(socketServiceProvider);
