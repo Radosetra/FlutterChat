@@ -30,6 +30,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void onSubmitMessage(){
     if (typedMessage.isNotEmpty) {
       User currentUser = User(userId: generateId(), userName: typedMessage);
+      // ref from flutter riverpod
       ref
         .read(userProvider.notifier)
         .setCurrentUser(currentUser);
