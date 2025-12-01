@@ -20,9 +20,11 @@ class MainApp extends ConsumerWidget {
 
     // Correctly listen to the auth state for navigation
     ref.listen(authProvider, (previousState, newState) {
+      // print('Auth state changed: ${newState.status}');
       if (newState.status == AuthStatus.authenticated) {
         // Redirect to the main authenticated screen
         appRouter.replaceAll([const ChatHomeRoute()]);
+        // should connect socket here
       } else if (newState.status == AuthStatus.unauthenticated) {
         // Redirect to the login screen
         appRouter.replaceAll([const LoginRoute()]);
