@@ -53,15 +53,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final LogoutUseCase _logoutUseCase;
 
   AuthNotifier(this._loginUseCase, this._logoutUseCase)
-      : super(AuthState(status: AuthStatus.initial));
+    : super(AuthState(status: AuthStatus.initial));
 
   Future<void> login(String email, String password) async {
     state = AuthState(status: AuthStatus.loading);
     try {
       final user = await _loginUseCase.execute(email, password);
-      print("Result");
-      print(user);
+      
       state = AuthState(status: AuthStatus.authenticated, user: user);
+      print("Auth status");
+      print(state.status);
     } catch (e) {
       print("Login error: $e");
       state = AuthState(status: AuthStatus.error, errorMessage: e.toString());
