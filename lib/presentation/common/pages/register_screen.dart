@@ -12,14 +12,14 @@ class RegisterScreen extends ConsumerWidget {
     return Scaffold(
       body: Column(
         children: [
-          Center(
+          const Center(
             child: Text('Your login screen design here'),
           ),
           ElevatedButton(
             onPressed: () async {
               await ref.read(authProvider.notifier).logout();
             }, 
-            child: Text("Logout")
+            child: const Text("Logout")
           )
         ],
       ),
