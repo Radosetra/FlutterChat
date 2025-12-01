@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_chat/data/service/socket_service.dart';
+import 'package:my_chat/core/socket_service.dart';
+import 'package:my_chat/presentation/common/providers/auth_provider.dart';
 
-final socketServiceProvider = Provider<SocketService>((ref) {
-  return SocketService(ref);
-});
+final socketServiceProvider = Provider((ref) => SocketService(
+  ref.read(secureStorageServiceProvider),
+));
